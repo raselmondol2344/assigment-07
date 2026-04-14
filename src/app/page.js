@@ -1,6 +1,8 @@
+import FriendData from "@/FriendsData/FriendData";
 import { MdAdd } from "react-icons/md";
 
 export default function Homepage() {
+ 
   return (
      <section id="bannar-heading">
       <div className="hero mb-10 ">
@@ -39,8 +41,10 @@ export default function Homepage() {
       </div>
      </div>
 
-
-
+     <div  className="container max-w-7xl mx-auto gap-5 mb-20">
+      <FriendData></FriendData>
+     </div>
+         
      
 
      </section>
