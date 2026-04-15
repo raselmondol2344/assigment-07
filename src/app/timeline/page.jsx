@@ -119,8 +119,6 @@ const TimelinePage = () => {
 
 
             )}
-
-
             
             {item.type === "Video" && (
                <div id="VideoCard" className="p-5 border border-gray-300 rounded-md bg-base-200 shadow-md flex  justify-start gap-5 items-center">
