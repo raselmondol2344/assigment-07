@@ -27,6 +27,11 @@ const Navbar = () => {
       <li className="flex justify-center items-center">
         <Link className={`${pathName === "/status" ? "bg-green-800 text-white" : ""}`} href="/status"> <span><GoGraph /></span> <span>Status</span></Link>
       </li>
+
+
+      {/* <li className="flex justify-center items-center">
+        <Link className={`${pathName === "/status" ? "bg-green-800 text-white" : ""}`} href="/FriendsData"> FriendsData</Link>
+      </li> */}
      
       
     </ul>

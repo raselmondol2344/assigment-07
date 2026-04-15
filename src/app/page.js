@@ -1,4 +1,4 @@
-import FriendData from "@/FriendsData/FriendData";
+import FriendData from "@/app/FriendsData/page";
 import { MdAdd } from "react-icons/md";
 
 export default function Homepage() {
@@ -42,7 +42,9 @@ export default function Homepage() {
      </div>
 
      <div  className="container max-w-7xl mx-auto gap-5 mb-20">
+      <h1 className=" font-bold text-2xl mb-5">Your Friends</h1>
       <FriendData></FriendData>
+      
      </div>
          
      
