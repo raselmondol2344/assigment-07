@@ -1,4 +1,6 @@
 import FriendData from "@/app/FriendsData/page";
+import { Span } from "next/dist/trace";
+import { Suspense } from "react";
 import { MdAdd } from "react-icons/md";
 
 export default function Homepage() {
@@ -43,7 +45,9 @@ export default function Homepage() {
 
      <div  className="container max-w-7xl mx-auto gap-5 mb-20">
       <h1 className=" font-bold text-2xl mb-5">Your Friends</h1>
-      <FriendData></FriendData>
+      <Suspense fallback ={<span className="loading loading-spinner text-warning"></span>}>
+        <FriendData></FriendData>
+      </Suspense>
       
      </div>
          

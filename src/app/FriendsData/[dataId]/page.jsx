@@ -1,3 +1,4 @@
+"use client";
 import friendData from "../../../../public/data.json";
 import Image from "next/image";
 import { RiNotificationSnoozeLine } from "react-icons/ri";
@@ -6,21 +7,52 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { FiPhoneCall } from "react-icons/fi";
 import { MdOutlineTextsms } from "react-icons/md";
 import { IoMdVideocam } from "react-icons/io";
-import Link from "next/link";
+// import Link from "next/link";
+import { use } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const FriendDetails = async ({ params }) => {
-  const { dataId } = await params;
-
+const FriendDetails = ({ params }) => {
+  const { dataId } = use (params);
   const id = Number(dataId);
-  //   const friend = data.find(item => item.id ==params.id)
   const friend = friendData.find((item) => Number(item.id) === id);
+// new
+  const addToTimeline = (type) => {
+    const savedData = JSON.parse(localStorage.getItem("friend_timeline")) || [];
+    const today = new Date().toLocaleString('en-US', {
+      month: 'long', day: 'numeric', year: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    });
+
+    const newEntry = {
+      name: friend.name,
+      type,
+      date: today,
+      // id: Math.random().toString(36).slice(2, 11) + Date.now().toString(36)
+      
+    };
+
+    localStorage.setItem("friend_timeline", JSON.stringify([newEntry, ...savedData]));
+    toast.success(`${type} with ${friend.name} added to timeline!`);
+   
+
+
+    
+  };
+ 
+
+  
+  
+  
 
   if (!friend) {
     return <h1>Friend not found</h1>;
   }
 
   return (
+   
     <div className="grid grid-cols-2 gap-8 container max-w-7xl mx-auto pt-10 pb-20">
+       
       <div className=" ">
         <div id="leftsideDiv" className=" items-center bg-base-300   rounded-md shadow-lg p-5 mb-10">
         <div>
@@ -118,58 +150,37 @@ const FriendDetails = async ({ params }) => {
 
            <div className="grid grid-cols-3 gap-5  p-5 mx-auto text-center ">
 
-            {/* <Link href="/timeline">
-             <div id="call" className="flex flex-col p-2 items-cente bg-base-300  border border-gray-200 rounded-md shadow-lg">
-                <p className=" flex justify-center text-center"><FiPhoneCall /></p>
-                <p>call</p>
-
-                
-            </div>
-                            </Link> */}
-                            <Link href={`/timeline?name=${friend.name}&type=Call`}>
-                  <div id="call" className="...">
+          
+                {/* <Link href={`/timeline?name=${friend.name}&type=Call`}> */}
+                  <div onClick={() => addToTimeline("Call")} id="call" className="flex flex-col p-2 items-center bg-base-300 border border-gray-200 rounded-md shadow-lg cursor-pointer hover:bg-gray-200">
                     <p className="flex justify-center"><FiPhoneCall /></p>
                     <p>Call</p>
                   </div>
-                </Link>
+                {/* </Link> */}
 
-           {/* <Link href="/timeline">
-            <div id="text" className=" flex flex-col p-2 items-cente bg-base-300  border-gray-200 rounded-md shadow-lg">
-                <p className=" flex justify-center text-center"><MdOutlineTextsms /></p>
-                <p>Text</p>
+         
 
-
-            </div>
-           </Link> */}
-
-                        <Link href={`/timeline?name=${friend.name}&type=Text`}>
-                <div id="text" className="flex flex-col p-2 items-center bg-base-300 border border-gray-200 rounded-md shadow-lg cursor-pointer hover:bg-gray-200">
+                {/* <Link href={`/timeline?name=${friend.name}&type=Text`}> */}
+                <div onClick={() => addToTimeline("Text")} id="text" className="flex flex-col p-2 items-center bg-base-300 border border-gray-200 rounded-md shadow-lg cursor-pointer hover:bg-gray-200">
                   <p className="flex justify-center text-center"><MdOutlineTextsms /></p>
                   <p>Text</p>
                 </div>
-              </Link>
-
-            {/* <Link href="/timeline">
-            <div id="video" className="flex flex-col p-2 items-cente bg-base-300  border border-gray-200 rounded-md shadow-lg">
-                <p className=" flex justify-center text-center" ><IoMdVideocam /></p>
-                <p>video</p>
+              {/* </Link> */}
 
 
-            </div>
-            </Link> */}
-
-                      <Link href={`/timeline?name=${friend.name}&type=Video`}>
-              <div id="video" className="flex flex-col p-2 items-center bg-base-300 border border-gray-200 rounded-md shadow-lg cursor-pointer hover:bg-gray-200">
+              {/* <Link href={`/timeline?name=${friend.name}&type=Video`}> */}
+              <div onClick={() => addToTimeline("Video")} id="video" className="flex flex-col p-2 items-center bg-base-300 border border-gray-200 rounded-md shadow-lg cursor-pointer hover:bg-gray-200">
                 <p className="flex justify-center text-center"><IoMdVideocam /></p>
                 <p>Video</p>
               </div>
-            </Link>
+            {/* </Link> */}
 
 
            </div>
         </div>
 
       </div>
+       <ToastContainer />
 
 
     </div>

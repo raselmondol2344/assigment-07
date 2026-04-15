@@ -6,12 +6,7 @@ import friendData from "../../../public/data.json"
 
 
 const FriendData =  () => {
-  // const res = await fetch("" );
-  //  const friendData = await res.json();
-  //  console.log(friendData);
-
-
-
+  
 return (
          
            
