@@ -1,11 +1,11 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState,Suspense } from "react";
 import { IoMdText } from "react-icons/io";
 import { FiPhoneCall } from "react-icons/fi";
 import { FaVideo } from "react-icons/fa";
 
-const TimelinePage = () => {
+const TimelineContent = () => {
   const searchParams = useSearchParams();
   const [activities, setActivities] = useState([]);
   const [filterType, setFilterType] = useState("All");
@@ -149,4 +149,14 @@ const TimelinePage = () => {
   );
 };
 
-export default TimelinePage;
+
+
+const TimelinePage =() =>{
+  return(
+    <Suspense fallback ={<div>Loading...</div>}>
+      <TimelineContent />
+    </Suspense>
+  );
+}
+
+export default TimelinePage ;
